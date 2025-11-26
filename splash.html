@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Splash Screen</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+    setTimeout(() => {
+        // If user is logged in → go to home  
+        if (localStorage.getItem("loggedIn") === "true") {
+            window.location.href = "index.html";
+        } 
+        // If not logged in → go to login
+        else {
+            window.location.href = "login.html";
+        }
+    }, 2500); // 2.5 seconds
+    </script>
+</head>
+
+<body class="splash-body">
+    <div class="splash-logo">
+        RECENT
+    </div>
+</body>
+</html>

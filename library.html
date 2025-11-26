@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Library | FreeNet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">FreeNet</div>
+</header>
+
+<h2 class="page-title">My Library</h2>
+
+<div id="libraryContainer" class="row-posters"></div>
+
+<nav class="bottom-nav">
+    <a href="index.html">Home</a>
+    <a href="search.html">Search</a>
+    <a href="library.html">Library</a>
+</nav>
+
+<script src="library.js"></script>
+</body>
+</html>
+...
+  <script src="app.js"></script>
+  <script src="nav.js"></script>
+</body>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library | FreeNet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">Your Library</div>
+</header>
+
+<h3 class="section-title">Watch Later</h3>
+
+<div class="movie-grid" id="watchLaterList"></div>
+
+<script>
+function loadWatchLater() {
+    const watchLater = JSON.parse(localStorage.getItem("watchLater") || "[]");
+    const movies = JSON.parse(localStorage.getItem("movies") || "[]");
+
+    let container = document.getElementById("watchLaterList");
+    container.innerHTML = "";
+
+    if (watchLater.length === 0) {
+        container.innerHTML = "<p style='color:white;'>No saved movies yet.</p>";
+        return;
+    }
+
+    watchLater.forEach(id => {
+        const movie = movies.find(m => m.id === id);
+        if (!movie) return;
+
+        container.innerHTML += `
+            <div class="movie-card" onclick="openMovie(${movie.id})">
+                <img src="${movie.poster}">
+                <p>${movie.title}</p>
+            </div>
+        `;
+    });
+}
+
+function openMovie(id) {
+    localStorage.setItem("selectedMovie", id);
+    window.location.href = "details.html";
+}
+
+loadWatchLater();
+</script>
+
+<script src="nav.js"></script>
+</body>
+</html>

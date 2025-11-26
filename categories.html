@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top-bar">
+    <h2>Categories</h2>
+</header>
+
+<div class="category-list">
+    <button onclick="openCategory('Action')">Action</button>
+    <button onclick="openCategory('Drama')">Drama</button>
+    <button onclick="openCategory('Romance')">Romance</button>
+    <button onclick="openCategory('Comedy')">Comedy</button>
+    <button onclick="openCategory('Horror')">Horror</button>
+    <button onclick="openCategory('Sci-Fi')">Sci-Fi</button>
+</div>
+
+<h3 style="margin-left:15px;">Results</h3>
+<div class="movie-grid" id="categoryResults"></div>
+
+<script>
+function openCategory(category) {
+    const movies = JSON.parse(localStorage.getItem("movies") || "[]");
+    const container = document.getElementById("categoryResults");
+
+    container.innerHTML = "";
+
+    movies.forEach(movie => {
+        if (movie.genre === category) {
+            container.innerHTML += `
+                <div class="movie-card" onclick="openMovie(${movie.id})">
+                    <img src="${movie.poster}">
+                    <p>${movie.title}</p>
+                </div>
+            `;
+        }
+    });
+}
+
+function openMovie(id) {
+    localStorage.setItem("selectedMovie", id);
+    window.location.href = "details.html";
+}
+</script>
+
+</body>
+</html>

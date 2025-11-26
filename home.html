@@ -1,0 +1,9 @@
+<h3 class="section-title">Continue Watching</h3>
+<div class="movie-grid" id="continueList"></div>
+<div class="movie-card" onclick="openMovie(${movie.id})">
+    <img src="${movie.poster}">
+    <div class="progress-bar">
+        <div class="progress-fill" style="width:${(JSON.parse(saved).time / movie.duration) * 100}%;"></div>
+    </div>
+    <p>${movie.title}</p>
+</div>

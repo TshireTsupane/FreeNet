@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="details-body">
+
+<div id="banner">
+    <img id="banner-img" src="">
+    <div class="banner-fade"></div>
+
+    <div class="banner-info">
+        <h1 id="movie-title"></h1>
+        <p id="movie-genre"></p>
+        <p id="movie-year"></p>
+
+        <button class="play-btn" onclick="playMovie()">▶ Play</button>
+        <button class="fav-btn" onclick="addToFavorites()">♡ Add to Favorites</button>
+    </div>
+</div>
+
+<div class="description-box">
+    <h3>Description</h3>
+    <p id="movie-desc"></p>
+</div>
+<div id="seriesBox" style="display:none; padding:20px;">
+    <h3>Episodes</h3>
+    <select id="seasonSelect" onchange="changeSeason()"></select>
+    <div id="episodeList"></div>
+</div>
+
+<script>
+const movies = JSON.parse(localStorage.getItem("movies") || "[]");
+const movieId = parseInt(localStorage.getItem("selectedMovie"));
+const movie = movies.find(m => m.id === movieId);
+
+document.getElementById("banner-img").src = movie.poster;
+document.getElementById("movie-title").textContent = movie.title;
+document.getElementById("movie-genre").textContent = "Genre: " + movie.genre;
+document.getElementById("movie-year").textContent = "Year: " + movie.year;
+document.getElementById("movie-desc").textContent = movie.description;
+if (movie.type === "series") {
+    loadSeasons(movie);
+}
+
+function playMovie() {
+    window.location.href = "player.html";
+}
+
+function addToFavorites() {
+    const favs = JSON.parse(localStorage.getItem("favorites") || "[]");
+
+    if (!favs.includes(movieId)) {
+        favs.push(movieId);
+        localStorage.setItem("favorites", JSON.stringify(favs));
+        alert("Added to Favorites ❤️");
+    } else {
+        alert("Already in Favorites!");
+    }
+}
+</script>
+
+</body>
+</html>

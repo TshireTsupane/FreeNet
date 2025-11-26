@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreeNet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<script>
+    if (!localStorage.getItem("loggedInUser")) {
+        window.location.href = "login.html";
+    }
+</script>
+    <!-- Top Navigation -->
+    <header class="navbar">
+        <div class="logo">FreeNet</div>
+    </header>
+
+    <!-- Banner -->
+    <section class="banner">
+        <div class="banner-text">
+            <h1>Welcome to FreeNet</h1>
+            <p>Stream free movies and series anytime.</p>
+        </div>
+    </section>
+
+    <!-- Movie Rows -->
+    <section class="row">
+        <h2>Trending Now</h2>
+        <div class="row-posters" id="trending"></div>
+    </section>
+
+    <section class="row">
+        <h2>Action Movies</h2>
+        <div class="row-posters" id="action"></div>
+    </section>
+
+    <section class="row">
+        <h2>Drama Series</h2>
+        <div class="row-posters" id="drama"></div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html">Home</a>
+        <a href="search.html">Search</a>
+        <a href="#">Library</a>
+    </nav>
+
+    <script src="app.js"></script>
+</body>
+<button class="big-btn" onclick="location.href='categories.html'">
+    Browse Categories
+</button>
+<button onclick="logout()" style="color:white; background:none; border:none; float:right;">Logout</button>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FreeNet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">FreeNet</div>
+    <a class="search-icon" href="search.html">🔍</a>
+</header>
+
+<section class="movie-grid" id="homeMovies"></section>
+
+<script>
+    function loadHomeMovies() {
+        const movies = JSON.parse(localStorage.getItem("movies") || "[]");
+        const container = document.getElementById("homeMovies");
+
+        container.innerHTML = "";
+
+        movies.forEach(movie => {
+            container.innerHTML += `
+                <div class="movie-card" onclick="openMovie(${movie.id})">
+                    <img src="${movie.poster}">
+                    <p>${movie.title}</p>
+                </div>
+            `;
+        });
+    }
+
+    function openMovie(id) {
+        localStorage.setItem("selectedMovie", id);
+        window.location.href = "details.html";
+    }
+
+    loadHomeMovies();
+</script>
+
+</body>
+</html>
+...
+  <script src="app.js"></script>
+  <script src="nav.js"></script>
+</body>

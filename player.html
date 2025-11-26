@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Player | FreeNet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">Now Playing</div>
+</header>
+
+<div class="player-container">
+    <video id="videoPlayer" controls autoplay></video>
+</div>
+const saved = localStorage.getItem("continueWatching_" + movieId);
+if (saved) {
+    const progress = JSON.parse(saved);
+    video.currentTime = progress.time;
+}
+<script>
+    function loadVideo() {
+        const url = localStorage.getItem("playURL");
+        const player = document.getElementById("videoPlayer");
+
+        if (!url) {
+            alert("No video URL found.");
+            return;
+        }
+
+    const epLink = localStorage.getItem("episodeLink");
+
+if (epLink) {
+    video.src = epLink;
+    localStorage.removeItem("episodeLink");
+} else {
+    video.src = movie.link;
+}
+    }
+
+    loadVideo();
+</script>
+const video = document.getElementById("videoPlayer");
+const movieId = parseInt(localStorage.getItem("selectedMovie"));
+
+video.addEventListener("timeupdate", () => {
+    const progress = {
+        id: movieId,
+        time: video.currentTime
+    };
+
+    localStorage.setItem("continueWatching_" + movieId, JSON.stringify(progress));
+});
+</body>
+</html>
+...
+  <script src="app.js"></script>
+  <script src="nav.js"></script>
+</body>

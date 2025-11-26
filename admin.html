@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel | FreeNet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">Admin Panel</div>
+</header>
+
+<div class="admin-container">
+
+    <h2>Add New Movie</h2>
+
+    <input id="movieTitle" type="text" placeholder="Title">
+
+    <textarea id="movieDesc" placeholder="Description"></textarea>
+
+    <input id="movieCategory" type="text" placeholder="Category (Action, Drama, etc.)">
+
+    <input id="movieURL" type="text" placeholder="Video Link (PeerTube, YouTube, MP4)">
+
+    <label class="upload-label">
+        Select Poster
+        <input id="moviePoster" type="file" accept="image/*">
+    </label>
+
+    <button onclick="addMovie()">Add Movie</button>
+
+    <h3>Uploaded Movies</h3>
+    <div id="movieList"></div>
+
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
+...
+  <script src="app.js"></script>
+  <script src="nav.js"></script>
+</body>

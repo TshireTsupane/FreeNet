@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search - FreeNet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">FreeNet</div>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="Search movies or series...">
+        <div id="searchResults"></div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html">Home</a>
+        <a href="search.html">Search</a>
+        <a href="#">Library</a>
+    </nav>
+
+    <script src="search.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search | FreeNet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">Search</div>
+</header>
+
+<div class="search-container">
+    <input type="text" id="searchBox" placeholder="Search movies..." onkeyup="searchMovies()">
+</div>
+
+<div class="movie-grid" id="searchResults"></div>
+
+<script>
+    function searchMovies() {
+        const query = document.getElementById("searchBox").value.toLowerCase();
+        const movies = JSON.parse(localStorage.getItem("movies") || "[]");
+        const results = document.getElementById("searchResults");
+
+        results.innerHTML = "";
+
+        movies.forEach(movie => {
+            if (movie.title.toLowerCase().includes(query)) {
+                results.innerHTML += `
+                    <div class="movie-card" onclick="openMovie(${movie.id})">
+                        <img src="${movie.poster}">
+                        <p>${movie.title}</p>
+                    </div>
+                `;
+            }
+        });
+    }
+
+    function openMovie(id) {
+        localStorage.setItem("selectedMovie", id);
+        window.location.href = "details.html";
+    }
+</script>
+
+</body>
+</html>
+...
+  <script src="app.js"></script>
+  <script src="nav.js"></script>
+</body>
